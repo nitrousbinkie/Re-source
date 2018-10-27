@@ -1,0 +1,57 @@
+body {
+    font-family: 'Niramit', sans-serif;
+}
+
+.sideBar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 50px;
+    background-color: #005050;
+    border-right:1px solid #004040;
+    /*box-shadow:inset 0px 0px 10px rgba(0,0,0,0.6);*/
+}
+
+.sideBarMenu
+{
+    position:fixed;
+    left:50px;
+    top:0px;
+    bottom:0px;
+    width:250px;
+    background-color:#007070;
+    box-shadow: inset 0px 0px 15px rgba(0,0,0,0.8);
+}
+
+.workArea {
+    position: fixed;
+    top: 0px;
+    left: 300px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #E0E0E0;
+    overflow: auto;
+    
+}
+
+
+.dayHeading
+{
+    float:left;
+    padding:10px;
+    width:150px;
+    border:1px solid #a0a0a0;
+}
+
+.person
+{
+    padding:10px;
+    width:150px;
+    text-align:center;
+    border:1px solid black;
+}
+.day
+{
+    width:150px;
+}

@@ -1,0 +1,77 @@
+.ResourceView{
+    overflow-x:scroll;
+    margin-left:150px;
+    box-sizing:border-box;
+}
+.ResourceView table{
+    border-collapse:collapse;
+}
+.ResourceView td{
+    padding:5px;
+    margin:0px;
+    text-align:center;
+    overflow:hidden;
+    font-weight:normal;
+    font-size:10pt;
+}
+.ResourceView th{
+    font-weight:bold;
+    font-size:10pt;
+    border:1px solid #a0a0a0;
+    padding-left:5px;
+    padding-right:5px;
+    width:200px;
+    min-width:150px;
+}
+.ResourceView tr{
+    
+}
+.ResourceView .UserRow {
+    min-height: 50px;
+    height: 50px;
+}
+.ResourceView td{
+    border:1px solid #a0a0a0;
+}
+.ResourceView .FixedColumn{
+    position:absolute;
+    left:0;
+    text-align:left !important;
+    padding-left:50px !important;
+    width:150px !important;    
+    box-sizing:border-box;
+}
+.ResourceView .Today
+{
+    background-color:#E0FFFF;    
+}
+.ResourceView .Planned{
+    border:1px solid #FF8000;
+    color:#FF8000;
+    background-color:#ffe0a0;
+    cursor:pointer;
+}
+.ResourceView .Unplanned {
+    border: 1px solid #505050;
+    color: #505050;
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+.ResourceView .OverDue {
+    border: 1px solid red;
+    background-color: #FFE0E0;
+    color: red;
+    cursor: pointer;
+}
+.ResourceView .InProgress {
+    border: 1px solid #0000FF;
+    background-color: #E0E0FF;
+    color: #0000FF;
+    cursor: pointer;
+}
+.ResourceView .Complete {
+    border: 1px solid #008000;
+    background-color: #E0FFE0;
+    color: #008000;
+    cursor: pointer;
+}
