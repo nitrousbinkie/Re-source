@@ -44,12 +44,14 @@
             //console.log("x: " + x + " -Day of week: " + day);
 
             // Since we're always looking ahead, the first instance of the current day of the week will be today.
+            html += "<td ";
             if (x + 1 == today) {
-                html += "<td class=\"Today\">";
+                html += "class=\"Today\" ";
             }
             else {
-                html += "<td " + (day > 5 ? "style=\"Background-color:#F0F0F0;\"" : "style=\"background-color:white;\"") + ">";
+                html += (day > 5 ? "style=\"Background-color:#F0F0F0;\"" : "style=\"background-color:white;\"");
             }
+            html += "data-userid=\"" + user.Name + "\" data-dayindex=\"" + x + "\">";   // TODO: This should be the user id not the name when we have real data!!
 
             if (d.Users[u].Schedule && d.Users[u].Schedule.length > x) {
                 if (d.Users[u].Schedule[x].Tasks) {
