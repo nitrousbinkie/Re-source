@@ -9,10 +9,12 @@ $(function () {
                         {
                             Tasks: [
                                 {
+                                    Id: 1,
                                     Label: "Scheduling",
                                     State: "InProgress"
                                 },
                                 {
+                                    Id: 2,
                                     Label: "CR11283",
                                     State: "Planned"
                                 }
@@ -32,6 +34,7 @@ $(function () {
                     {
                         Tasks: [
                             {
+                                Id: 3,
                                 Label: "CR12345 [Imp 1/2]",
                                 State: "Complete"
                             }
@@ -40,6 +43,7 @@ $(function () {
                     {
                         Tasks: [
                             {
+                                Id: 4,
                                 Label: "CR12345 [Imp 2/2]",
                                 State: "Planned"
                             }
@@ -54,6 +58,7 @@ $(function () {
                     {
                         Tasks: [
                             {
+                                Id: 5,
                                 Label: "Test",
                                 State: "Complete"
                             }
@@ -82,6 +87,7 @@ $(function () {
                     {
                         Tasks: [
                             {
+                                Id: 6,
                                 Label: "CR12345 [Test]",
                                 State: "Planned"
                             }
@@ -90,6 +96,7 @@ $(function () {
                     {
                         Tasks: [
                             {
+                                Id: 7,
                                 Label: "CR12345 [Doc]",
                                 State: "InProgress"
                             }
@@ -109,6 +116,7 @@ $(function () {
             {
                 Tasks: [
                     {
+                        Id: 8,
                         Label: "CallBar -November Release",
                         State: "Planned"
                     }
@@ -122,6 +130,7 @@ $(function () {
             {
                 Tasks: [
                     {
+                        Id: 9,
                         Label: "Security Review",
                         State: "Planned"
                     }
@@ -135,6 +144,7 @@ $(function () {
         ],
         Unallocated: [
             {
+                Id: 10,
                 Label: "CR57985",
                 State: "Unplanned"
             }

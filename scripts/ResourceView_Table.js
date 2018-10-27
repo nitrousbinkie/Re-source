@@ -13,7 +13,7 @@
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday"    // 7!! \o/
+        "Sunday"    // 7!! \o/ 
     ]
 
     let date = new Date();
@@ -27,8 +27,7 @@
         }
         else {
             html += "<th>" + dayNames[day] + "</th>";
-        }
-        
+        }        
     }
     html += "</tr>";
 
@@ -59,7 +58,7 @@
                     for (var t = 0; t < d.Users[u].Schedule[x].Tasks.length; t++) {
                         let task = d.Users[u].Schedule[x].Tasks[t];
                         //console.log(task.Label);
-                        html += "<div class=\"Task " + task.State + "\">" + task.Label + "</div>";
+                        html += "<div class=\"Task " + task.State + "\" data-taskid=\"" + task.Id + "\">" + task.Label + "</div>";
                     }
                 }
             }            
@@ -73,7 +72,7 @@
         if (d.Events[x].Tasks) {
             for (var t = 0; t < d.Events[x].Tasks.length; t++) {
                 let task = d.Events[x].Tasks[t];
-                html += "<div class=\"Task " + task.State + "\">" + task.Label + "</div>";
+                html += "<div class=\"Task " + task.State + "\" data-taskid=\"" + task.Id + "\">" + task.Label + "</div>";
             }
         }
         html += "</td>";
@@ -86,7 +85,7 @@
         if (x + 1 == today) {
             for (var t = 0; t < d.Unallocated.length; t++) {
                 let task = d.Unallocated[t];
-                html += "<div class=\"Task " + task.State + "\">" + task.Label + "</div>";
+                html += "<div class=\"Task " + task.State + "\" data-taskid=\"" + task.Id + "\">" + task.Label + "</div>";
             }
         }        
         html += "</td>";
@@ -96,7 +95,13 @@
     html += "</table></div>";
 
     this.html(html);
-    $(".ResourceView .UserRow th").css("height", $(this).next().height() + "px");    
+    $(".ResourceView .Task").click(function () {
+        let t = $(this).attr("data-taskid");
+
+        let w = $("<div>");
+        w.taskview({Id:t});
+    })
+    $(".ResourceView .UserRow th").css("height", $(this).next().height() + "px");
 
     return this;
 });
