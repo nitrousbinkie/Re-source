@@ -1,4 +1,4 @@
-($.fn.resourceview = function (d) {
+($.fn.resourceview = function (dataSource, d) {
 
     var html = "<div class=\"ResourceView\"><table>";
 
@@ -13,7 +13,7 @@
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday"    // 7!! \o/ 
+        "Sunday"    // 7!! 
     ]
 
     let date = new Date();
@@ -49,7 +49,7 @@
                 html += "class=\"Today\" ";
             }
             else {
-                html += (day > 5 ? "style=\"Background-color:#F0F0F0;\"" : "style=\"background-color:white;\"");
+                html += (day > 5 ? "class=\"WeekEndDay\"" : "class=\"WeekDay\"");
             }
             html += "data-userid=\"" + user.Name + "\" data-dayindex=\"" + x + "\">";   // TODO: This should be the user id not the name when we have real data!!
 
@@ -101,7 +101,8 @@
         let t = $(this).attr("data-taskid");
 
         let w = $("<div>");
-        w.taskview({Id:t});
+        console.log(dataSource);
+        w.taskview({Source:dataSource, Id:t});
     })
     $(".ResourceView .UserRow th").css("height", $(this).next().height() + "px");
 

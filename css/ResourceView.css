@@ -41,6 +41,13 @@
     width:150px !important;    
     box-sizing:border-box;
 }
+.ResourceView .WeekDay
+{
+    background-color:white;
+}
+.ResourceView .WeekEndDay {
+    background-color: #F0F0F0;
+}
 .ResourceView .Today
 {
     background-color:#E0FFFF;    

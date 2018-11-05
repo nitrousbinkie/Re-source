@@ -149,9 +149,21 @@ $(function () {
                 State: "Unplanned"
             }
         ]
+    }    
+    console.log(config);
+    //$(".workArea").resourceview(config);
+
+    var _Source = new DataSource();
+    _Source.OnAuthenticated = function () {
+        console.log("DataSource Authenticated!");
+        $(".LoginViewMask").fadeOut(250);
+        $(".workArea").resourceview(_Source, config);
+    }
+    _Source.OnLoggedOut = function () {
+        console.log("DataSource LOG OUT!");
+        $(".LoginViewMask").fadeIn(250);
     }
 
-    console.log(config);
-    $(".workArea").resourceview(config);
+    $("#divLogin").loginview(_Source);
 
 })
