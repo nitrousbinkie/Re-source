@@ -76,7 +76,7 @@ DataSource.prototype.GetTask = function (taskid, successCallback, errorCallback)
             }
 
             let task = {
-                Id: data.Rows[0].TaskId,
+                TaskId: data.Rows[0].TaskId,
                 Description: data.Rows[0].Description,
                 Title: data.Rows[0].Title,
                 State: "Planned",           // TODO: Missed this from the data collection!!
@@ -88,11 +88,39 @@ DataSource.prototype.GetTask = function (taskid, successCallback, errorCallback)
             };
 
             // We now load the notes...
-            source.GetData("Resource_Task_Notes", [{ f: "TaskId", c: "=", v: task.Id }], [], notecallback(callback, task), notefailcallback(callback, task));
+            source.GetData("Resource_Task_Notes", [{ f: "TaskId", c: "=", v: task.TaskId }], [], notecallback(callback, task), notefailcallback(callback, task));
         }
     }
 
     this.GetData("ReSource_Tasks", where, [], loadCallback(this, successCallback), errorCallback);    
+}
+
+DataSource.prototype.SaveTaskField = function (taskid, field, newValue, successCallback, errorCallback) {
+    console.log("Save field " + field + " in taskid: " + taskid);
+    var fields = {};
+    fields[field] = newValue;
+
+    var where = [
+        {
+            f: "TaskId",
+            c: "=",
+            v: taskid
+        }
+    ];
+
+    this.UpdateData("Resource_Tasks", where, fields, successCallback, errorCallback);
+}
+
+DataSource.prototype.AddNote = function (taskid, notetext, successCallback, errorCallback) {
+    console.log("Insert Note for taskid: " + taskid);
+    var rows = [];
+    rows.push(
+        {
+            Note: notetext,
+            TaskId:taskid
+        });
+
+    this.InsertData("Resource_Task_Notes", rows, successCallback, errorCallback);
 }
 
 // Below should be considered private, it's not part of the public interface
@@ -108,6 +136,55 @@ DataSource.prototype.GetData = function (dataset, where, order, successcallback,
     var d = {
         where: where,
         order: order
+    };
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        crossDomain: true,
+        data: JSON.stringify(d),
+        cache: false,
+        beforeSend: setHeader(this),
+        success: successcallback,
+        error: errorcallback
+    });
+}
+
+DataSource.prototype.InsertData = function (dataset, rows, successcallback, errorcallback) {
+    var url = this.BaseURL + "/11008/data/" + dataset;
+    var setHeader = function (Source) {
+        return function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + Source.SessionToken);
+        }
+    }
+
+    var d = {
+        insert: rows
+    };
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        crossDomain: true,
+        data: JSON.stringify(d),
+        cache: false,
+        beforeSend: setHeader(this),
+        success: successcallback,
+        error: errorcallback
+    });
+}
+
+DataSource.prototype.UpdateData = function (dataset, where, fields, successcallback, errorcallback) {
+    var url = this.BaseURL + "/11008/data/" + dataset;
+    var setHeader = function (Source) {
+        return function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + Source.SessionToken);
+        }
+    }
+
+    var d = {
+        where: where,
+        update: fields
     };
 
     $.ajax({

@@ -1,6 +1,11 @@
 ($.fn.taskview = function (d) {
 
-    var callback = function (view) {  // The view is the DOM element the taskview method was called on
+    // d = {
+    //      Source: [datasource],
+    //      Id: [taskid]
+    // }
+
+    var callback = function (view, d) {  // The view is the DOM element the taskview method was called on
         return function (task) {
             console.log(task);
             let mask = $("<div>");
@@ -11,9 +16,16 @@
 
             mask.append(dialog);
 
-            let heading = $("<div>");
-            heading.text(task.Title);
+            let heading = $("<div>");            
             heading.addClass("TaskViewContent_Heading");
+
+            let titleBox = $("<input type=\"text\">");
+            titleBox.val(task.Title);
+            titleBox.change(function () {
+                d.Source.SaveTaskField(task.TaskId, "Title", $(this).val(), function () { }, function () { });
+            });
+            heading.append(titleBox);
+
             let closeButton = $("<div>");
             closeButton.addClass("TaskViewContent_CloseButton");
             closeButton.text("X");
@@ -21,7 +33,7 @@
                 mask.fadeOut(250);
             });
             heading.append(closeButton);
-            dialog.append(heading);
+            dialog.append(heading);           
 
             let statusPanel = $("<div>");
             statusPanel.addClass("TaskViewContent_StatusPanel")
@@ -41,15 +53,18 @@
             descriptionPanel.addClass("TaskViewContent_DescriptionPanel");
             descriptionPanel.text(task.Description);
             dialog.append(descriptionPanel);
+            descriptionPanel.change(function () {
+                d.Source.SaveTaskField(task.TaskId, "Description", $(this).val(), function () { }, function () { });
+            });
 
             let notePanel = $("<div>");
-            notePanel.addClass("TaskViewContent_NotePanel");
+            notePanel.addClass("TaskViewContent_NotePanel");            
 
             for (var x = 0; x < task.Notes.length; x++) {
                 let noteDiv = $("<div>");
 
                 let noteAuthor = $("<div>");
-                noteAuthor.text(task.Notes[x].User);
+                noteAuthor.text(task.Notes[x].User + " on " + task.Notes[x].TimeStamp);
                 noteAuthor.addClass("TaskViewContent_NoteAuthor");
 
                 noteDiv.text(task.Notes[x].Content);
@@ -58,15 +73,49 @@
                 noteDiv.addClass("TaskViewContent_Note");
                 notePanel.append(noteDiv);
             }
+            if (task.Notes.length == 0) {
+                notePanel.text("There are no notes on this task yet");
+            }
             dialog.append(notePanel);
 
             let updatePanel = $("<div>");
             updatePanel.addClass("TaskViewContent_UpdatePanel");
             let updateBox = $("<textarea>");
-            updateBox.attr("placeholder", "Type an update");
+            updateBox.attr("placeholder", "Type an update to add a note.");
             updateBox.addClass("TaskViewContent_UpdateBox");
             updatePanel.append(updateBox);
+            var saveButton = $("<button>");
+            saveButton.text("Send Update");
+            saveButton.css("position", "relative");
+            saveButton.css("left", "680px");
+            saveButton.css("top", "-45px");
+
+            var saveCallback = function (notepanel, notetext) {
+                return function (data) {
+                    let note = $("<div>");
+                    let noteAuthor = $("<div>");
+                    noteAuthor.text("You, just now.");
+                    noteAuthor.addClass("TaskViewContent_NoteAuthor");
+                    note.text(notetext);
+                    note.prepend(noteAuthor);
+                    note.addClass("TaskViewContent_Note");
+                    notepanel.append(note);
+                }
+            }
+
+            saveButton.click(function () {
+                if (updateBox.val() != "") {
+                    d.Source.AddNote(task.TaskId, updateBox.val(),
+                        saveCallback(notePanel, updateBox.val()),
+                        function () {
+                        });
+                    updateBox.val("");
+                }
+            });
+            updatePanel.append(saveButton);
             dialog.append(updatePanel);
+
+
 
             view.append(mask);
             view.appendTo("body");
@@ -79,10 +128,11 @@
         }
     }
 
-    d.Source.GetTask(d.Id, callback(this), function () { });
+    d.Source.GetTask(d.Id, callback(this, d), function () { });
 
-    // For Reference the below is the task object
+    // For Reference the below is a sample task object
     let task = {
+        TaskId: 1,
         Title: "This is a Test Task",
         State: "Planned",      
         CreatedBy: "James Sumner",
@@ -121,8 +171,6 @@
             }
         ]
     }
-
-    
 
     return this;
 });
