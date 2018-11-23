@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TaskViewTest</title>
+    <link href="../Demo.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet" />
+    <link href="../css/LoginView.css" rel="stylesheet" />
+    <link href="../css/ResourceView.css" rel="stylesheet" />
+    <link href="../css/TaskView.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+<body>
+    <div class="workArea">
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>    
+    <script src="../scripts/TaskView.js"></script>
+    <script src="../scripts/Source_Mock.js"></script>
+    <script>
+        $(function () {
+            let source = new DataSource();
+            let w = $("<div>");
+            w.taskview({ Source: source, Id: 1 });
+        });
+    </script>
+</body>
+</html>

@@ -115,8 +115,6 @@
             updatePanel.append(saveButton);
             dialog.append(updatePanel);
 
-
-
             view.append(mask);
             view.appendTo("body");
             mask.fadeIn(250);
