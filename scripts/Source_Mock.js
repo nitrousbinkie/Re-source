@@ -4,6 +4,15 @@ function DataSource() {
     this.Authenticated = true;
     this.SessionToken = "notarealsessiontokenatallinanyway";
     this.DataStore = {};    
+
+    var callback = function(Source)
+    {
+        return function(States){
+            Source.DataStore["TaskStates"] = States;
+        }
+    }
+
+    this.GetTaskStates(callback(this));
 }
 
 DataSource.prototype.Authenticate = function (username, password, successCallback, errorCallback) {
@@ -13,6 +22,8 @@ DataSource.prototype.Authenticate = function (username, password, successCallbac
 DataSource.prototype.OnAuthenticated = function () { }
 DataSource.prototype.OnLoggedOut = function () { }
 
+
+// Task Operations
 DataSource.prototype.GetTask = function (taskid, successCallback, errorCallback) {
 
     // We do some nested callback stuff here to build the task before we pass it back to the provided successCallback
@@ -23,7 +34,7 @@ DataSource.prototype.GetTask = function (taskid, successCallback, errorCallback)
         TaskId: taskid,
         Description: "This isn't a real task.",
         Title: "This is the title",
-        State: "Planned",           // TODO: Missed this from the data collection!!
+        State: "Complete",          // TODO: Missed this from the data collection!!
         CreatedBy: "nobody",
         CreatedDate: "2018-11-01T11:30:00",
         AssignedUsers: [],
@@ -43,28 +54,56 @@ DataSource.prototype.GetTask = function (taskid, successCallback, errorCallback)
 
 DataSource.prototype.SaveTaskField = function (taskid, field, newValue, successCallback, errorCallback) {
     console.log("Save field " + field + " in taskid: " + taskid);
-    var fields = {};
-    fields[field] = newValue;
-
-    var where = [
-        {
-            f: "TaskId",
-            c: "=",
-            v: taskid
-        }
-    ];
-
-    this.UpdateData("Resource_Tasks", where, fields, successCallback, errorCallback);
+    setTimeout(function(){successCallback()}, 500);
 }
 
 DataSource.prototype.AddNote = function (taskid, notetext, successCallback, errorCallback) {
     console.log("Insert Note for taskid: " + taskid);
-    var rows = [];
-    rows.push(
-        {
-            Note: notetext,
-            TaskId: taskid
-        });
+   
+    setTimeout(function(){successCallback()}, 500);
+}
 
-    this.InsertData("Resource_Task_Notes", rows, successCallback, errorCallback);
+// Get status codes etc...
+DataSource.prototype.GetTaskStates = function(successCallback, errorCallback){
+    var TaskStates = {
+        Identified:{
+            "Background-Color":"#990033",
+            "Color":"#FFFFFF"
+        },
+        Specified:{
+            "Background-Color":"#FF0000",
+            "Color":"#FFFFFF"
+        },
+        Resourced:{
+            "Background-Color":"#FF3300",
+            "Color":"#FFFFFF"
+        },
+        Development:{
+            "Background-Color":"#FF9900",
+            "Color":"#FFFFFF"
+        },
+        "Code Review":{
+            "Background-Color":"#CC6600",
+            "Color":"#FFFFFF"
+        },
+        "Waiting Test Release":{
+            "Background-Color":"#99CC00",
+            "Color":"#FFFFFF"
+        },
+        "Test":{
+            "Background-Color":"#009900",
+            "Color":"#FFFFFF"
+        },
+        "Waiting Live Release":{
+            "Background-Color":"#006600",
+            "Color":"#FFFFFF"
+        },
+        "Complete":
+        {
+            "Background-Color":"#339966",
+            "Color":"#FFFFFF"
+        }
+    };
+
+    setTimeout(function(){successCallback(TaskStates);}, 500);
 }

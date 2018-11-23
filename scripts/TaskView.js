@@ -40,13 +40,72 @@
             let state = $("<div>");
             state.addClass("TaskViewContent_State");
             state.text(task.State);
+            try{
+                state.css("background-color", d.Source.DataStore["TaskStates"][task.State]["Background-Color"]);
+                state.css("color", d.Source.DataStore["TaskStates"][task.State]["Color"]);
+            }
+            catch(Error)
+            {
+                console.log("The state of the task " + task.TaskId + " " + task.State + " isn't defined, or couldn't be loaded");
+            }
+            var stateClickHandler = function(task, d, view)
+            {
+                return function(){
+                    let stateSelect = $("<div>");
+                    stateSelect.addClass("TaskViewContent_StateSelectDropdown");
+                    for(var x in d.Source.DataStore["TaskStates"])
+                    {
+                        // console.log(x);
+                        let thisState = $("<div>");
+                        thisState.addClass("TaskViewContent_State");
+                        thisState.text(x);
+                        thisState.css("background-color", d.Source.DataStore["TaskStates"][x]["Background-Color"]);
+                        thisState.css("color", d.Source.DataStore["TaskStates"][x]["Color"]);
+                        let s = x;
+                        thisState.click(function(){
+                            console.log("Set task status for task " + task.TaskId + " from " + task.State + " to " + s);
+                            if(task.State != s){
+                                d.Source.SaveTaskField(task.TaskId, "State", s, function(){}, function(){});                                
+                                task.State = s;
+                                state.text(task.State);
+                                try{
+                                    state.css("background-color", d.Source.DataStore["TaskStates"][task.State]["Background-Color"]);
+                                    state.css("color", d.Source.DataStore["TaskStates"][task.State]["Color"]);
+                                }
+                                catch(Error)
+                                {
+                                    console.log("The state of the task " + task.TaskId + " " + task.State + " isn't defined, or couldn't be loaded");
+                                }
+                            }
+                            stateSelect.fadeOut(250);
+                        });
+
+                        stateSelect.append(thisState);
+                    }
+                    stateSelect.css("display", "none");
+                    dialog.append(stateSelect);
+                    stateSelect.fadeIn(250);
+                }
+            }
+            state.click(stateClickHandler(task, d, view));
             statusPanel.append(state);
+           
             for (var x = 0; x < task.AssignedUsers.length; x++) {
                 let userDiv = $("<div>");
                 userDiv.text(task.AssignedUsers[x].Name);
                 userDiv.addClass("TaskViewContent_User");
                 statusPanel.append(userDiv);
             }
+           
+            let historyButton = $("<div>");
+            historyButton.text("assignment");
+            historyButton.addClass("material-icons");
+            historyButton.addClass("TaskViewContent_HistoryButton");
+            historyButton.addClass("ToolTipEnabled");
+            historyButton.attr("ToolTip", "Show history");
+            historyButton.css("float", "right");
+            statusPanel.append(historyButton);
+
             dialog.append(statusPanel);
 
             let descriptionPanel = $("<TextArea>");
@@ -99,7 +158,9 @@
                     note.text(notetext);
                     note.prepend(noteAuthor);
                     note.addClass("TaskViewContent_Note");
+                    note.css("display","none");
                     notepanel.append(note);
+                    note.fadeIn(250);
                 }
             }
 
@@ -123,6 +184,7 @@
             console.log("Height: " + h);
 
             notePanel.css("height", h + "px");
+
         }
     }
 

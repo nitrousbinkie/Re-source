@@ -64,20 +64,43 @@
 .TaskViewContent_StatusPanel 
 {
     color: #505050;
-    padding-left: 10px;
+    padding-left: 0px;
     padding-right: 10px;
     height:50px;
     line-height:50px;
     border-bottom:1px solid #a0a0a0;
 }
 
+.TaskViewContent_HistoryButton{        
+    height:38px;    
+    padding-top:12px;
+}
+.TaskViewContent_HistoryButton:hover{
+    cursor:pointer;
+    color:#007070;
+    transition:ease-in;
+}
+
 .TaskViewContent_State {
     min-width: 150px;
     text-align: center;
     float: left;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 10px;
+    height: 40px;
+    line-height: 25px;
+    padding-top: 10px;
+    cursor:pointer;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.TaskViewContent_StateSelectDropdown
+{
+    position:absolute;
+    width: 150px;
+    min-width: 150px;
+    top:100px;
+    left:0px;    
+    box-shadow:5px 5px 30px rgba(0,0,0,0.5);    
 }
 
 .TaskViewContent_User{
