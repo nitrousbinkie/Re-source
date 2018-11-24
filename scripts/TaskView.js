@@ -96,7 +96,12 @@
                 userDiv.addClass("TaskViewContent_User");
                 statusPanel.append(userDiv);
             }
-           
+
+            let assignUserButton = $("<div>");
+            assignUserButton.addClass("TaskViewContent_AssignUserButton");
+            assignUserButton.text("+");
+            statusPanel.append(assignUserButton);
+
             let historyButton = $("<div>");
             historyButton.text("assignment");
             historyButton.addClass("material-icons");

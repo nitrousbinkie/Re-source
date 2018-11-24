@@ -5,14 +5,22 @@ function DataSource() {
     this.SessionToken = "notarealsessiontokenatallinanyway";
     this.DataStore = {};    
 
-    var callback = function(Source)
+    var statecallback = function(Source)
     {
         return function(States){
             Source.DataStore["TaskStates"] = States;
         }
     }
+    this.GetTaskStates(statecallback(this));
 
-    this.GetTaskStates(callback(this));
+    var userscallback = function(Source)
+    {
+        return function(Users)
+        {
+            Source.DataStore["Users"] = Users;
+        }
+    }
+    this.GetUserList(userscallback(this));
 }
 
 DataSource.prototype.Authenticate = function (username, password, successCallback, errorCallback) {
@@ -106,4 +114,16 @@ DataSource.prototype.GetTaskStates = function(successCallback, errorCallback){
     };
 
     setTimeout(function(){successCallback(TaskStates);}, 500);
+}
+
+DataSource.prototype.GetUserList = function(successCallback, errorCallback){
+    let Users = {
+        "James.Sumner@ultracomms.com":
+        {
+            FullName:"James Sumner",
+            ShortName:"James S"
+        }
+    }
+
+    successCallback(Users);
 }
