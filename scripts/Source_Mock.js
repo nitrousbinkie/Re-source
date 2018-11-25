@@ -71,6 +71,11 @@ DataSource.prototype.AddNote = function (taskid, notetext, successCallback, erro
     setTimeout(function(){successCallback()}, 500);
 }
 
+DataSource.prototype.AssignUsers = function(taskid, users, successCallback, errorCallback){
+    console.log("Assign Users for taskid: " + taskid);
+    setTimeout(successCallback, 500);
+}
+
 // Get status codes etc...
 DataSource.prototype.GetTaskStates = function(successCallback, errorCallback){
     var TaskStates = {

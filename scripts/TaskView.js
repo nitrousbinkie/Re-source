@@ -89,17 +89,41 @@
             }
             state.click(stateClickHandler(task, d, view));
             statusPanel.append(state);
-           
-            for (var x = 0; x < task.AssignedUsers.length; x++) {
-                let userDiv = $("<div>");
-                userDiv.text(task.AssignedUsers[x].Name);
-                userDiv.addClass("TaskViewContent_User");
-                statusPanel.append(userDiv);
+                       
+            let showUsers = function(task, statusPanel){
+                for (var x = 0; x < task.AssignedUsers.length; x++) {
+                    let userDiv = $("<div>");
+                    userDiv.text(task.AssignedUsers[x].ShortName);
+                    userDiv.addClass("TaskViewContent_User");
+                    userDiv.insertBefore(assignUserButton);
+                }
             }
+            showUsers(task, statusPanel);
 
-            let assignUserButton = $("<div>");
+            let assignUserButton = $("<div>"); 
             assignUserButton.addClass("TaskViewContent_AssignUserButton");
             assignUserButton.text("+");
+            let assignUserCallback = function(users){
+                console.log("Users selected: ");
+                console.log(users);
+                statusPanel.children(".TaskViewContent_User").remove(); // Any previously selected
+                task.AssignedUsers = [];
+                for(var x=0;x<users.length;x++)
+                {
+                    let user = d.Source.DataStore["Users"][users[x]];   // users[x] will be an email address
+                    task.AssignedUsers.push(user);
+                }
+                showUsers(task, statusPanel);
+                d.Source.AssignUsers(task.TaskId, users, function(){
+
+                }, function(){
+
+                });
+            }
+            assignUserButton.click(function(){
+                let aud = $("<div>");
+                aud.userassignmentview({Source:d.Source, SelectionCallback:assignUserCallback});
+            });
             statusPanel.append(assignUserButton);
 
             let historyButton = $("<div>");
