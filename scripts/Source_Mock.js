@@ -122,6 +122,176 @@ DataSource.prototype.GetUserList = function(successCallback, errorCallback){
         {
             FullName:"James Sumner",
             ShortName:"James S"
+        },
+        "J.Sumner@ultracomms.com":
+        {
+            FullName:"James Sumner",
+            ShortName:"James S"
+        },
+        "JamesS@ultracomms.com":
+        {
+            FullName:"James Sumner",
+            ShortName:"James S"
+        },
+        "James@ultracomms.com":
+        {
+            FullName:"James Sumner",
+            ShortName:"James S"
+        },
+        "James@jamesedward.co.uk":
+        {
+            FullName:"James Sumner",
+            ShortName:"James S"
+        },
+        "User01@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User02@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User03@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User04@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User05@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User06@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User07@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User08@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User09@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User10@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User11@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User12@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User13@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User14@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User15@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User16@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User17@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User18@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User19@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User20@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User21@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User22@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User23@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User24@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User25@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User26@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User27@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User28@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User29@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
+        },
+        "User30@ultracomms.com":
+        {
+            FullName:"User 01",
+            ShortName:"User 01"
         }
     }
 
